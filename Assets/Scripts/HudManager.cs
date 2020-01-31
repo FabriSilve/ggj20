@@ -4,26 +4,24 @@ using UnityEngine;
 
 public class HudManager : MonoBehaviour
 {
-    [SerializeField]
-    GameObject ship;
+    public GameObject ship;
+    public float roundTime; // Time to reach goal (in seconds)
+    public int padding; // Padding between ship image and the border of the screen
 
-    [SerializeField]
-    float roundTime; // Time to reach goal (in seconds)
+    private float elapsedTime;
 
-    [SerializeField]
-    int startingPosition;
-
-    [SerializeField]
-    int endingPosition;
-
-    float elapsedTime = 0;
+    void Start()
+    {
+        elapsedTime = 0;
+        ship.SetActive(true);
+    }
 
     void Update()
     {
-        if (elapsedTime < roundTime && ship.transform.position.x < endingPosition)
+        if (elapsedTime < roundTime && ship.transform.position.x < Screen.width - padding)
         {
             elapsedTime += Time.deltaTime;
-            float newPos = (endingPosition - startingPosition) * elapsedTime / roundTime;
+            float newPos = Screen.width * elapsedTime / roundTime + padding;
             ship.transform.position = new Vector3(newPos, ship.transform.position.y, ship.transform.position.z);
         }
     }

@@ -172,7 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f2c60ba4da2a418192de161068952c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentcontrolMode: 0
+  speed: 50
   currentItem: {fileID: 0}
 --- !u!136 &20400849
 CapsuleCollider:
@@ -404,7 +404,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &547390785
 RectTransform:
   m_ObjectHideFlags: 0
@@ -419,9 +419,9 @@ RectTransform:
   m_Father: {fileID: 1553578265}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -800, y: -80}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 960, y: -80}
   m_SizeDelta: {x: 779, y: 473}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &547390786
@@ -1290,8 +1290,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ship: {fileID: 547390784}
   roundTime: 10
-  startingPosition: -800
-  endingPosition: 800
+  padding: 80
 --- !u!1 &1647991226
 GameObject:
   m_ObjectHideFlags: 0
