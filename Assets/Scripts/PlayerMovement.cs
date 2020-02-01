@@ -5,16 +5,40 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float baseMovementSpeed = 50f;
-    private float gravity = 0;
-
+    public float rotationSpeed;
+   
     [SerializeField]
     private CharacterController controller;
     [SerializeField]
     private Inventory inventory;
 
-    private void ControlPlayer()
+    private Animator animator;
+    private Vector3 prevPosition;
+
+    private void Rotate()
     {
-        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), gravity, Input.GetAxis("Vertical"));
+        Vector3 direction = transform.position - prevPosition;
+        direction.Normalize();
+
+        if (direction != Vector3.zero)
+        {
+            transform.rotation = Quaternion.RotateTowards(
+                transform.rotation,
+                Quaternion.LookRotation(direction),
+                Time.deltaTime * rotationSpeed
+            );
+        }
+    }
+
+    private void ChangeSpeed()
+    {
+        float speed = (prevPosition - transform.position).magnitude / Time.deltaTime;
+        animator.SetFloat("speed", speed);
+    }
+
+    private void Move()
+    {
+        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         controller.Move(move * Time.deltaTime * SpeedMultiplier());
     }
 
@@ -26,22 +50,21 @@ public class PlayerMovement : MonoBehaviour
         return speedMultiplier;
     }
 
-    private void ComputeGravity()
-    {
-        gravity = controller.isGrounded ? 0 : gravity - (9.81f * Time.deltaTime);
-    }
-
     // Start is called before the first frame update
     void Start()
     {
+        prevPosition = transform.position;
         controller = GetComponent<CharacterController>();
         inventory = GetComponent<Inventory>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        ComputeGravity();
-        ControlPlayer();
+        ChangeSpeed();
+        Rotate();
+        prevPosition = transform.position;
+        Move();
     }
 }
