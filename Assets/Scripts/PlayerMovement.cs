@@ -33,6 +33,8 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     private Vector3 prevPosition;
 
+    private float gravity = 0;
+
     private void Rotate()
     {
         Vector3 direction = transform.position - prevPosition;
@@ -56,8 +58,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move()
     {
-        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), gravity, Input.GetAxis("Vertical"));
         controller.Move(move * Time.deltaTime * SpeedMultiplier());
+    }
+
+    private void ComputeGravity()
+    {
+        gravity = controller.isGrounded ? 0 : gravity - (9.81f * Time.deltaTime);
     }
 
     private float SpeedMultiplier()
@@ -80,6 +87,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        ComputeGravity();
         ChangeSpeed();
         Rotate();
         prevPosition = transform.position;
