@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInventory : MonoBehaviour
+public class Inventory : MonoBehaviour
 {
     public int maxSize = 10;
     private List<Item> storage = new List<Item>();

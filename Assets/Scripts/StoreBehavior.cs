@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StoreInventory : MonoBehaviour
+public class StoreBehavior : MonoBehaviour
 {
     public List<Item> items;
 
