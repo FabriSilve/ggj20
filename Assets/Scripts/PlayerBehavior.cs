@@ -12,10 +12,12 @@ public class PlayerBehavior : MonoBehaviour
 
     public ControlMode currentcontrolMode;
 
+    public float baseMovementSpeed = 50f;
 
-    public float movementSpeed = 50f;
-
+    [SerializeField]
     private CharacterController controller;
+    [SerializeField]
+    private Inventory inventory;
 
     private float gravity = 0;
 
@@ -29,14 +31,10 @@ public class PlayerBehavior : MonoBehaviour
         //}
     }
 
-
     void ControlPlayer()
-    {
-        //TODO we can use Kinnematic is is to avoid the gravity.
-
-        gravity = controller.isGrounded ? 0 : gravity - (9.81f * Time.deltaTime);
+    {        
         Vector3 move = new Vector3(Input.GetAxis("Horizontal"), gravity, Input.GetAxis("Vertical"));
-        controller.Move(move * Time.deltaTime * movementSpeed);
+        controller.Move(move * Time.deltaTime * baseMovementSpeed);
     }
 
     void ControlPlayerWithArrows()
@@ -112,19 +110,28 @@ public class PlayerBehavior : MonoBehaviour
         }
     }
 
+    private int SpeedMultiplier() {
+        int weight = inventory.Weight();
+        return weight;
+        // baseMovementSpeed
+    }
 
-
+    private void ComputeGravity() {
+        gravity = controller.isGrounded ? 0 : gravity - (9.81f * Time.deltaTime);
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        // Store reference to attached component
+        // Store reference to attached components
         controller = GetComponent<CharacterController>();
+        inventory = GetComponent<Inventory>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        ComputeGravity();
         ControlPlayer();
     }
 }

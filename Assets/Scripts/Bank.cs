@@ -19,20 +19,20 @@ public class Bank : MonoBehaviour
         
     }
 
-    int Credit() {
+    public int Credit() {
         return credit;
     }
 
-    void AddCredit(int amount) {
+    public void AddCredit(int amount) {
         credit += amount;
     }
 
-    bool CanWithDraw(int amount) {
+    public bool CanWithdraw(int amount) {
         return amount <= credit;
     }
 
-    bool Withdraw(int amount) {
-        if (CanWithDrawCredit(amount)) {
+    public bool Withdraw(int amount) {
+        if (CanWithdraw(amount)) {
             credit -= amount;
             return true;
         } else {

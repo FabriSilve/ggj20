@@ -18,7 +18,7 @@ public class StoreBehavior : MonoBehaviour
         
     }
 
-    int Weight() {
+    public int Weight() {
         int weight = 0;
         foreach (var item in items) {
             weight += item.weight;
@@ -26,14 +26,14 @@ public class StoreBehavior : MonoBehaviour
         return weight;
     }
 
-    int Size() {
+    public int Size() {
         return items.Count;
     }
 
-    bool Buy(Item item, Bank bank, Inventory inventory) {
+    public bool Buy(Item item, Bank bank, Inventory inventory) {
         if (!items.Contains(item)) return false;
         if (inventory.IsFull()) return false;
-        if (bank.CanWithDraw(item.price)) return false;
+        if (bank.CanWithdraw(item.price)) return false;
         bank.Withdraw(item.price);
         items.Remove(item);
         inventory.Insert(item);
