@@ -27,7 +27,7 @@ public class Spawnable : MonoBehaviour
     }
 
     bool Spawn(Transform transform, System.Func<GameObject, GameObject> setup) {
-        return Spawn(transform, match, defaultObjectLifetime);
+        return Spawn(transform, setup, defaultObjectLifetime);
     }
 
     bool Spawn(Transform transform, System.Func<GameObject, GameObject> setup, int lifetime) {
