@@ -38,7 +38,7 @@ public class LevelManager : MonoBehaviour
 
         for (int i = 0; i < spawnPointZSize; i++)
         {
-            for (int y = 0; y < spawnPointXSize; y++)
+            for (int j = 0; j < spawnPointXSize; j++)
             {
 
 
@@ -47,14 +47,14 @@ public class LevelManager : MonoBehaviour
                 //TODO fix the name it galls
 
 
-                // spawnPoint.name = "SpawnPoint " + y + (i * (y / spawnPointXSize)).ToString();
-                spawnPoint.name = ((i * spawnPointZSize) + y).ToString();
+                // spawnPoint.name = "SpawnPoint " + j + (i * (j / spawnPointXSize)).ToString();
+                spawnPoint.name = ((i * spawnPointZSize) + j).ToString();
 
-                allLevelSpawnPoints[i + y] = spawnPoint.transform;
-                allSpawnPointLogic[i + y] = spawnPoint.GetComponent<SpawnPoint>();
+                allLevelSpawnPoints[i + j] = spawnPoint.transform;
+                allSpawnPointLogic[i + j] = spawnPoint.GetComponent<SpawnPoint>();
 
                 //It lowers Z 
-                float x = -baseTerrain.transform.localScale.x / 2 + spawnPoint.transform.localScale.x / 2 + (y * spawnPoint.transform.localScale.x);
+                float x = -baseTerrain.transform.localScale.x / 2 + spawnPoint.transform.localScale.x / 2 + (j * spawnPoint.transform.localScale.x);
                 float z = baseTerrain.transform.localScale.x / 2 - spawnPoint.transform.localScale.x / 2 - (i * spawnPoint.transform.localScale.x);
 
                 spawnPoint.transform.position = new Vector3(x, 1, z);
