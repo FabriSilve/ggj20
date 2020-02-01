@@ -18,6 +18,14 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(move * Time.deltaTime * SpeedMultiplier());
     }
 
+    private float SpeedMultiplier()
+    {
+        int weight = inventory.Weight();
+        // Super simple formula to linearly decrease player speed based on inventory weight.
+        float speedMultiplier = baseMovementSpeed - Mathf.Min(baseMovementSpeed / 2, weight);
+        return speedMultiplier;
+    }
+
     private void ComputeGravity()
     {
         gravity = controller.isGrounded ? 0 : gravity - (9.81f * Time.deltaTime);
