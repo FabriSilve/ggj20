@@ -30,11 +30,11 @@ public class StoreBehavior : MonoBehaviour
         return items.Count;
     }
 
-    public bool Buy(Item item, Bank bank, Inventory inventory) {
+    public bool Buy(Item item, Wallet wallet, Inventory inventory) {
         if (!items.Contains(item)) return false;
         if (inventory.IsFull()) return false;
-        if (bank.CanWithdraw(item.price)) return false;
-        bank.Withdraw(item.price);
+        if (wallet.CanWithdraw(item.price)) return false;
+        wallet.Withdraw(item.price);
         items.Remove(item);
         inventory.Insert(item);
         return true;

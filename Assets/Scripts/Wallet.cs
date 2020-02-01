@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bank : MonoBehaviour
+public class Wallet : MonoBehaviour
 {
     [SerializeField]
     private int credit = 0;
