@@ -4,8 +4,26 @@ using UnityEngine;
 
 public class ApplicationManager : MonoBehaviour
 {
+
+    public float maxAmmountOfWaterAllowed = 1000;
+    public float currentAmmountOfWater = 0;
+
+
+    //The waterTiles in their Update need to call this method
+
+    //TODO
+    public void AddWater(float ammount)
+    {
+        currentAmmountOfWater += ammount;
+        if (currentAmmountOfWater > maxAmmountOfWaterAllowed)
+        {
+            //You loose
+        }
+    }
+
     [SerializeField]
     LevelManager levelManager;
+
 
 
     private static ApplicationManager _instance;
@@ -35,6 +53,9 @@ public class ApplicationManager : MonoBehaviour
     private GameObject mainMenu;
     [SerializeField]
     private GameObject shopMenu;
+    [SerializeField]
+    private GameObject inventoryMenu;
+
     public enum GameStatus
     {
         InMenu,
