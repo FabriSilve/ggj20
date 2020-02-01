@@ -9,6 +9,9 @@ public class ApplicationManager : MonoBehaviour
     public float maxAmountOfWaterAllowed = 100;
     [SerializeField]
     private float currentAmountOfWater = 0;
+    [SerializeField]
+    private float elapsedTime = 0;
+    public float endOfProgress = 100;
 
 
     //The waterTiles in their Update need to call this method
@@ -150,7 +153,14 @@ public class ApplicationManager : MonoBehaviour
 
     private void Update()
     {
+        UpdateScore();
         ToggleMenu();
+    }
+
+    //TODO: Score should not just be a function of the elapsed time.
+    public void UpdateScore() {
+        elapsedTime += Time.deltaTime;
+        inventoryMenu.transform.Find("Score").GetComponent<TMPro.TextMeshProUGUI>().text = "Score: " + (int)elapsedTime;
     }
 
     public void ToggleMenu()
