@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 20400849}
   - component: {fileID: 20400848}
   - component: {fileID: 20400847}
+  - component: {fileID: 20400853}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -172,7 +173,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f2c60ba4da2a418192de161068952c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
+  currentcontrolMode: 0
+  movementSpeed: 50
   currentItem: {fileID: 0}
 --- !u!136 &20400849
 CapsuleCollider:
@@ -249,6 +251,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &20400853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 20400846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b61a9300d2ed45e990d4675d017d774, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSize: 10
 --- !u!1 &92984997
 GameObject:
   m_ObjectHideFlags: 0
@@ -992,7 +1007,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1265852782}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -244.56664, z: 0.000028000439}
+  m_LocalPosition: {x: 0, y: -285.62015, z: 0.0000328944}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1353,6 +1368,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c2e0e496f4974dd8aaf2e05801baf35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allPoints: []
 --- !u!4 &1804414766
 Transform:
   m_ObjectHideFlags: 0
