@@ -864,6 +864,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 117efd586484f4cd58e436b6f1b2312c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
   ID: 1
   weight: 120
   price: 50
@@ -973,9 +974,11 @@ MonoBehaviour:
   baseTerrain: {fileID: 799122613}
   spawnPointPrefab: {fileID: 841506297560505339, guid: cdf26ea192af04778a8777c9f2498bb5,
     type: 3}
-  allSpawnPointLogic: []
   spawnPointXSize: 0
   spawnPointZSize: 0
+  numberOfHoles: 0
+  totalWeight: 0
+  holeSpawnerGameObject: {fileID: 0}
 --- !u!4 &600134858
 Transform:
   m_ObjectHideFlags: 0
@@ -2009,6 +2012,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 117efd586484f4cd58e436b6f1b2312c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
   ID: 0
   weight: 10
   price: 25
@@ -2115,14 +2119,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca2ad7a3b67e641fdb66ebf7e6788bb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAmmountOfWaterAllowed: 1000
-  currentAmmountOfWater: 0
+  maxAmountOfWaterAllowed: 100
+  currentAmountOfWater: 0
   levelManager: {fileID: 600134857}
-  playerPrefab: {fileID: 5441517205346040343, guid: a9cd8480c7750495d9076ba76610d35e,
+  playerPrefab: {fileID: 1102216196793963113, guid: 48a8e426a2bd36a4f8aab4014888e5fc,
     type: 3}
   mainMenu: {fileID: 55145675}
   shopMenu: {fileID: 196979407}
   inventoryMenu: {fileID: 0}
+  gameOverMenu: {fileID: 0}
   currentGameStatus: 0
 --- !u!4 &1248992072
 Transform:
@@ -2758,6 +2763,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Barrel
+      objectReference: {fileID: 0}
+    - target: {fileID: 4003243997050620990, guid: 5c08652fe9c4fa44dbacbf25f970f1ab,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c08652fe9c4fa44dbacbf25f970f1ab, type: 3}
@@ -3576,6 +3586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 117efd586484f4cd58e436b6f1b2312c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
   ID: 3
   weight: 100
   price: 5000
