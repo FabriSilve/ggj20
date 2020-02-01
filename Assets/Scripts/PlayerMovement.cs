@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private void ControlPlayer()
     {
         Vector3 move = new Vector3(Input.GetAxis("Horizontal"), gravity, Input.GetAxis("Vertical"));
-        controller.Move(move * Time.deltaTime * baseMovementSpeed);
+        controller.Move(move * Time.deltaTime * SpeedMultiplier());
     }
 
     private void ComputeGravity()
