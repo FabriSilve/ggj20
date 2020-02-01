@@ -82,7 +82,7 @@ public class ApplicationManager : MonoBehaviour
         if (!currentPlayer)
         {
             levelManager.PopulateTerrain();
-            currentPlayer = Instantiate(playerPrefab, new Vector3(0, 10, 0), Quaternion.identity);
+            currentPlayer = Instantiate(playerPrefab, new Vector3(0, 6, 0), Quaternion.identity);
         }
         CloseMenu();
 
