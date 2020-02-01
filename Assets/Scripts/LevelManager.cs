@@ -21,6 +21,12 @@ public class LevelManager : MonoBehaviour
     public int numberOfHoles;
     public int totalWeight;
 
+    public GameObject holeSpawnerGameObject;
+    private Spawnable holeSpawner;
+
+    void Awake() {
+        holeSpawner = holeSpawnerGameObject.GetComponent<Spawnable>();
+    }
 
     Transform[] allLevelSpawnPoints;
     void InitializeScales()
@@ -32,7 +38,10 @@ public class LevelManager : MonoBehaviour
         grid = new SpawnPoint[spawnPointXSize, spawnPointZSize];
     }
 
-
+    void Start()
+    {
+        InvokeRepeating("CheckSpawner", 2.0f, 2f);
+    }
     public void PopulateTerrain()
     {
         //TODO I should destroy any existing ones
@@ -55,7 +64,7 @@ public class LevelManager : MonoBehaviour
                 allLevelSpawnPoints[i + j] = spawnPoint.transform;
                 SpawnPoint spawnPointComponent = spawnPoint.GetComponent<SpawnPoint>();
 
-                grid[i][j] = spawnPointComponent;
+                grid[i,j] = spawnPointComponent;
 
                 //It lowers Z 
                 float x = -baseTerrain.transform.localScale.x / 2 + spawnPoint.transform.localScale.x / 2 + (j * spawnPoint.transform.localScale.x);
@@ -76,19 +85,20 @@ public class LevelManager : MonoBehaviour
     {
             if (direction == CellConnections.left)
             {
-                return j - 1 > 0 ? grid[i][j-1] : null;
+                return j - 1 > 0 ? grid[i, j-1] : null;
             }
             if (direction == CellConnections.top){
-                return i - 1 > 0 ? grid[i-1][j] : null;
+                return i - 1 > 0 ? grid[i-1, j] : null;
             }
             if (direction == CellConnections.right)
             {
-                return j + 1 < spawnPointXSize ? grid[i][j+1] : null;
+                return j + 1 < spawnPointXSize ? grid[i, j+1] : null;
             }
             if (direction == CellConnections.down)
             {
-                return i + 1 < spawnPointZSize ? grid[i + 1][j] : null;
+                return i + 1 < spawnPointZSize ? grid[i + 1, j] : null;
             }
+        return null;
 
     }
 
@@ -105,22 +115,23 @@ public class LevelManager : MonoBehaviour
         PlayerPrefs.SetInt("Score", xpAmmount);
     }
 
-    void findCellWithWeights(int n)
+    Transform findCellWithWeights(int n)
     {
         int position = n;
         for (int i = 0; i < spawnPointZSize; i++)
         {
             for (int j = 0; j < spawnPointXSize; j++)
             {
-                position = position - grid[i][j].weight;
+                position = position - grid[i, j].weight;
                 if (position < 0)
                 {
                     addWeightToAllNeighbors(i, j, 4);
-                    return grid[i][j];
+                    return allLevelSpawnPoints[i + j];
                 }
             }
 
         }
+        return null;
     }
     void addWeightToAllNeighbors(int i, int j, int weight)
     {
@@ -137,9 +148,10 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    void SpawnRandomWaterTile()
+    void CheckSpawner()
     {
         int randompoint = Random.Range(0, this.totalWeight);
-        findCellWithWeights(randompoint);
+        Transform itemPosition = findCellWithWeights(randompoint);
+        holeSpawner.Spawn(itemPosition);
     }
 }
