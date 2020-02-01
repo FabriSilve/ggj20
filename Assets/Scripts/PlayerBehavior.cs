@@ -44,9 +44,9 @@ public class PlayerBehavior : MonoBehaviour
         // TODO: play error sound
         //}
 
-        if (currentItem)
+        if (item)
         {
-            IventoryMenu.Instance.HandleItemUsed(currentItem);
+            IventoryMenu.Instance.HandleItemUsed(item);
         }
 
 

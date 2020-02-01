@@ -43,7 +43,7 @@ public class IventoryMenu : MonoBehaviour
 
     public void HandleItemPurchased(Item newItem)
     {
-        switch (newItem.myItemClass)
+        switch (newItem.type)
         {
             case Item.ItemType.SinglePlank:
                 singlePlank.AddMoreAmmount(1);
@@ -61,7 +61,7 @@ public class IventoryMenu : MonoBehaviour
 
     public void HandleItemUsed(Item newItem)
     {
-        switch (newItem.myItemClass)
+        switch (newItem.type)
         {
             case Item.ItemType.SinglePlank:
                 singlePlank.RemoveAmmount(1);
