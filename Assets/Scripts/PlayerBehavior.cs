@@ -97,12 +97,7 @@ public class PlayerBehavior : MonoBehaviour
         }
     }
 
-    private int SpeedMultiplier() {
-        int weight = inventory.Weight();
-        // Super simple formula to linearly decrease player speed based on inventory weight.
-        int speedMultiplier = baseMovementSpeed - Math.min(baseMovementSpeed/2, weight);
-        return speedMultiplier;
-    }
+    
 
     // Start is called before the first frame update
     void Start()
