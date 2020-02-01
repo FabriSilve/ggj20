@@ -79,7 +79,7 @@ public class LevelManager : MonoBehaviour
     }
 
 
-    int timeDelay = 15;
+
 
     SpawnPoint getNeighbor(int i, int j, CellConnections direction)
     {

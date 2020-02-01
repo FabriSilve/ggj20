@@ -41,6 +41,12 @@ public class Item : MonoBehaviour
     {
         switch (myItemClass)
         {
+            case ItemType.SinglePlank:
+                break;
+            case ItemType.Barrel:
+                break;
+            case ItemType.TriplePlank:
+                break;
             default:
                 break;
         }
