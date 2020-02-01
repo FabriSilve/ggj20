@@ -6,6 +6,7 @@ public class Item : MonoBehaviour
 {
 
     public int weight = 1;
+    public int price = 1;
 
     public void Interact()
     {

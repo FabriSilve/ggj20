@@ -10,7 +10,7 @@ public class Inventory : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        bank = GetComponent<Bank>();
     }
 
     // Update is called once per frame
@@ -31,8 +31,12 @@ public class Inventory : MonoBehaviour
         return storage.Count;
     }
 
+    int IsFull() {
+        return Size() == maxSize;
+    }
+
     bool Insert(Item item) {
-        if (Size() == maxSize) {
+        if (IsFull()) {
             return false;
         } else {
             storage.Add(item);

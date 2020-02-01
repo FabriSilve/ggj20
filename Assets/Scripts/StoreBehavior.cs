@@ -30,8 +30,14 @@ public class StoreBehavior : MonoBehaviour
         return items.Count;
     }
 
-    void Pick(Item item) {
+    bool Buy(Item item, Bank bank, Inventory inventory) {
+        if (!items.Contains(item)) return false;
+        if (inventory.IsFull()) return false;
+        if (bank.CanWithDraw(item.price)) return false;
+        bank.Withdraw(item.price);
         items.Remove(item);
+        inventory.Insert(item);
+        return true;
     }
 }
 
