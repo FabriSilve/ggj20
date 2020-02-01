@@ -152,6 +152,6 @@ public class LevelManager : MonoBehaviour
     {
         int randompoint = Random.Range(0, this.totalWeight);
         Transform itemPosition = findCellWithWeights(randompoint);
-        holeSpawner.Spawn(itemPosition);
+        // holeSpawner.Spawn(itemPosition);
     }
 }

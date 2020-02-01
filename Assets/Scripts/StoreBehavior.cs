@@ -4,11 +4,7 @@ using UnityEngine;
 using System;
 public class StoreBehavior : MonoBehaviour
 {
-
-
     public List<Item> items;
-
-
 
     public int Weight()
     {

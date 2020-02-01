@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1914960519918317075
+--- !u!1 &6165680252294907446
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,45 +8,45 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4729864271537595012}
-  - component: {fileID: 4672274345652876243}
-  - component: {fileID: 1156755092921309171}
+  - component: {fileID: 4247773498212054065}
+  - component: {fileID: 795449042615690792}
+  - component: {fileID: 8099243480809359648}
   m_Layer: 0
-  m_Name: Barrel_Cylinder.001
+  m_Name: WoodCross_Cube.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4729864271537595012
+--- !u!4 &4247773498212054065
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1914960519918317075}
+  m_GameObject: {fileID: 6165680252294907446}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 132074352068541997}
+  m_Father: {fileID: 6364108776298254521}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &4672274345652876243
+--- !u!33 &795449042615690792
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1914960519918317075}
-  m_Mesh: {fileID: -7404329929434181139, guid: 01d9f258a51f8ab49ae1221a46bfda3f, type: 3}
---- !u!23 &1156755092921309171
+  m_GameObject: {fileID: 6165680252294907446}
+  m_Mesh: {fileID: 4131631506381492089, guid: fb3a8dda464e1444d9adebbec9682f0f, type: 3}
+--- !u!23 &8099243480809359648
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1914960519918317075}
+  m_GameObject: {fileID: 6165680252294907446}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c68a1906c318a3644aabbc954f9e6a18, type: 2}
+  - {fileID: 2100000, guid: c23451bc4b8a7964cb829e5cd3810e6e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -79,7 +79,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!1 &4003243997050620990
+--- !u!1 &7929294053804532394
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -87,41 +87,26 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 132074352068541997}
-  - component: {fileID: 8116223375873538943}
+  - component: {fileID: 6364108776298254521}
   m_Layer: 0
-  m_Name: Barrel
+  m_Name: WoodCross
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &132074352068541997
+--- !u!4 &6364108776298254521
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4003243997050620990}
+  m_GameObject: {fileID: 7929294053804532394}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalPosition: {x: -0, y: 0, z: 22.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4729864271537595012}
+  - {fileID: 4247773498212054065}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &8116223375873538943
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4003243997050620990}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 1.22
-  m_Height: 3.41
-  m_Direction: 1
-  m_Center: {x: 0.27, y: 1.75, z: -0.64}

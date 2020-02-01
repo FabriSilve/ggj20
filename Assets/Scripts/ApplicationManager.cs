@@ -159,8 +159,10 @@ public class ApplicationManager : MonoBehaviour
 
     //TODO: Score should not just be a function of the elapsed time.
     public void UpdateScore() {
-        elapsedTime += Time.deltaTime;
-        inventoryMenu.transform.Find("Score").GetComponent<TMPro.TextMeshProUGUI>().text = "Score: " + (int)elapsedTime;
+        if (currentGameStatus == GameStatus.Playing) {
+            elapsedTime += Time.deltaTime;
+            inventoryMenu.transform.Find("Score").GetComponent<TMPro.TextMeshProUGUI>().text = "Score: " + (int)elapsedTime;
+        }
     }
 
     public void ToggleMenu()
