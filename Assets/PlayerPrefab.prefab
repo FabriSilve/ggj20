@@ -113,7 +113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b61a9300d2ed45e990d4675d017d774, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSize: 10
+  itemSpawningPlace: {fileID: 0}
 --- !u!143 &330451047498467564
 CharacterController:
   m_ObjectHideFlags: 0
@@ -160,7 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9ddf0e3779f94c4497e7614ac3107df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  credit: 100
+  credit: 1000
 --- !u!95 &-7137365221911408254
 Animator:
   serializedVersion: 3

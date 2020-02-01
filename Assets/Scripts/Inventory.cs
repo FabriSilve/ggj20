@@ -47,7 +47,7 @@ public class Inventory : MonoBehaviour
     void Update()
     {
         ScrollForActiveItem();
-        UseOfActiveItem();
+        //  UseOfActiveItem();
     }
 
     public int Weight()

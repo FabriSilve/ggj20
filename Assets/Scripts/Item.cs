@@ -13,7 +13,7 @@ public class Item : MonoBehaviour
         TriplePlank
     }
 
-    private ItemType myItemClass;
+    public ItemType myItemClass;
 
     public static Action<Item> OnPurchaseMade;
 
@@ -81,6 +81,8 @@ public class Item : MonoBehaviour
         if (OnPurchaseMade != null)
         {
             OnPurchaseMade(this);
+            IventoryMenu.Instance.HandleItemPurchased(this);
+
 
         }
     }
