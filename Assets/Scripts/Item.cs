@@ -15,6 +15,7 @@ public class Item : MonoBehaviour
 
     public ItemType type;
 
+
     public static Action<Item> OnPurchaseMade;
 
     public int ID;
@@ -62,6 +63,9 @@ public class Item : MonoBehaviour
         if (OnPurchaseMade != null)
         {
             OnPurchaseMade(this);
+
+            IventoryMenu.Instance.HandleItemPurchased(this);
+
         }
     }
 }

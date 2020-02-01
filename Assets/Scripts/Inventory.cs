@@ -52,6 +52,8 @@ public class Inventory : MonoBehaviour
     void Update()
     {
         ScrollForActiveItem();
+        //  UseOfActiveItem();
+//TODO Think what to do here
         //UseOfActiveItem();
     }
 
