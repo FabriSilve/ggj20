@@ -5,6 +5,25 @@ using UnityEngine;
 public class ApplicationManager : MonoBehaviour
 {
     [SerializeField]
+    LevelManager levelManager;
+    private static ApplicationManager _instance;
+    public static ApplicationManager Instance;
+
+
+    private void Awake()
+    {
+        if (_instance == null)
+        {
+            _instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+
+    [SerializeField]
     private GameObject mainMenu;
 
     public enum GameStatus
@@ -17,13 +36,15 @@ public class ApplicationManager : MonoBehaviour
 
     public void StartGame()
     {
+        currentGameStatus = GameStatus.Playing;
+
         //TODO Hide the Menu,
         //Spawn the Player,
         //Let the LevelManager Know what to do.
         mainMenu.SetActive(currentGameStatus == GameStatus.InMenu);
         Time.timeScale = 1;
 
-        currentGameStatus = GameStatus.Playing;
+        levelManager.PopulateTerrain();
     }
 
     public void PauseGame()
@@ -37,14 +58,5 @@ public class ApplicationManager : MonoBehaviour
         // IF we have time ADD Score
     }
     // Start is called before the first frame update
-    void Start()
-    {
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }
