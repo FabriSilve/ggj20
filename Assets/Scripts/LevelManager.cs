@@ -15,8 +15,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     SpawnPoint[] allSpawnPointLogic;
 
-    int spawnPointXSize;
-    int spawnPointZSize;
+    public int spawnPointXSize;
+    public int spawnPointZSize;
 
 
     Transform[] allLevelSpawnPoints;
@@ -26,6 +26,7 @@ public class LevelManager : MonoBehaviour
         spawnPointZSize = (int)(baseTerrain.transform.localScale.z / spawnPointPrefab.transform.localScale.z);
 
         allLevelSpawnPoints = new Transform[spawnPointXSize * spawnPointZSize];
+        allSpawnPointLogic = new SpawnPoint[spawnPointXSize * spawnPointZSize];
     }
 
 
@@ -35,19 +36,26 @@ public class LevelManager : MonoBehaviour
 
         InitializeScales();
 
-        for (int i = 0; i < spawnPointXSize; i++)
+        for (int i = 0; i < 30; i++)
         {
-            for (int y = 0; y < spawnPointZSize; y++)
+            for (int y = 0; y < 30; y++)
             {
 
-                GameObject spawnPoint = Instantiate(spawnPointPrefab);
-                spawnPoint.name = "SpawnPoint " + i + y;
-                allLevelSpawnPoints[i + y] = spawnPoint.transform;
-                allSpawnPointLogic[i] = spawnPoint.GetComponent<SpawnPoint>();
 
-                //I feel I have to do something more here
-                float x = -baseTerrain.transform.localScale.x / 2 + spawnPoint.transform.localScale.x / 2 + (i * spawnPoint.transform.localScale.x);
-                float z = baseTerrain.transform.localScale.x / 2 - spawnPoint.transform.localScale.x / 2 - (y * spawnPoint.transform.localScale.x);
+
+                GameObject spawnPoint = Instantiate(spawnPointPrefab);
+                //TODO fix the name it galls
+
+
+                // spawnPoint.name = "SpawnPoint " + y + (i * (y / spawnPointXSize)).ToString();
+                spawnPoint.name = ((i * 30) + y).ToString();
+
+                allLevelSpawnPoints[i + y] = spawnPoint.transform;
+                allSpawnPointLogic[i + y] = spawnPoint.GetComponent<SpawnPoint>();
+
+                //It lowers Z 
+                float x = -baseTerrain.transform.localScale.x / 2 + spawnPoint.transform.localScale.x / 2 + (y * spawnPoint.transform.localScale.x);
+                float z = baseTerrain.transform.localScale.x / 2 - spawnPoint.transform.localScale.x / 2 - (i * spawnPoint.transform.localScale.x);
 
                 spawnPoint.transform.position = new Vector3(x, 1, z);
 
@@ -59,20 +67,14 @@ public class LevelManager : MonoBehaviour
 
 
     int timeDelay = 15;
-    Transform[] allPoints;
-    bool foundSpawnPoint = false;
 
 
-    // Start is called before the first frame update
-    void Start()
-    {
 
-    }
 
     // Update is called once per frame
     void Update()
     {
-        SpawnRandomWaterTile();
+        //SpawnRandomWaterTile();
     }
 
     void SaveData()

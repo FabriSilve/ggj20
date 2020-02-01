@@ -6,38 +6,43 @@ public class StoreBehavior : MonoBehaviour
 {
     public List<Item> items;
 
-    // Start is called before the first frame update
-    void Start()
+    public int Weight()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public int Weight() {
         int weight = 0;
-        foreach (var item in items) {
+        foreach (var item in items)
+        {
             weight += item.weight;
         }
         return weight;
     }
 
-    public int Size() {
+    public int Size()
+    {
         return items.Count;
     }
 
-    public bool Buy(Item item, Wallet wallet, Inventory inventory) {
+    public bool CanBuy(Item item, Wallet wallet, Inventory inventory)
+    {
         if (!items.Contains(item)) return false;
         if (inventory.IsFull()) return false;
         if (wallet.CanWithdraw(item.price)) return false;
-        wallet.Withdraw(item.price);
-        items.Remove(item);
-        inventory.Insert(item);
         return true;
+    }
+
+    public bool Buy(Item itemToBuy, Wallet playerWallet, Inventory playerInventory)
+    {
+        if (CanBuy(itemToBuy, playerWallet, playerInventory))
+        {
+            playerWallet.Withdraw(itemToBuy.price);
+            items.Remove(itemToBuy);
+            playerInventory.Insert(itemToBuy);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
     }
 }
 

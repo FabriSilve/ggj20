@@ -4,6 +4,24 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Shop")
+        {
+            ApplicationManager.Instance.OpenShopingMenu();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Shop")
+        {
+            ApplicationManager.Instance.CloseShopingMenu();
+
+        }
+    }
+
     public float baseMovementSpeed = 50f;
     public float rotationSpeed;
    

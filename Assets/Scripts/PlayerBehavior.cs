@@ -14,8 +14,6 @@ public class PlayerBehavior : MonoBehaviour
 
     [SerializeField]
     private CharacterController controller;
-    [SerializeField]
-    private Inventory inventory;
 
     public Item currentItem;
 
@@ -102,7 +100,6 @@ public class PlayerBehavior : MonoBehaviour
     {
         // Store reference to attached components
         controller = GetComponent<CharacterController>();
-        inventory = GetComponent<Inventory>();
     }
 
     // Update is called once per frame
