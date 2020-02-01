@@ -5,36 +5,77 @@ using UnityEngine.UI;
 
 public class IventoryMenu : MonoBehaviour
 {
-    [SerializeField]
-    Image plankImage;
-    [SerializeField]
-    Text singlePlankAmmount;
+    private static IventoryMenu _instance;
+    public static IventoryMenu Instance { get { return _instance; } }
 
-    [SerializeField]
-    Image barelImage;
-    [SerializeField]
-    Image barelAmmount;
-
-    [SerializeField]
-    Image triplePlankImage;
-    [SerializeField]
-    Image triplePlankAmmount;
-
-
-    void HandleInventoryUpdated(Item newItem)
+    private void Awake()
     {
+        if (_instance == null)
+        {
+            _instance = this;
+
+        }
 
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    [SerializeField]
+    InventoryUIItem singlePlank;
 
+    [SerializeField]
+    InventoryUIItem barel;
+
+    [SerializeField]
+    InventoryUIItem triplePlank;
+
+
+    [SerializeField]
+    TMPro.TextMeshProUGUI moneyLeft;
+
+
+    bool hasSubscribedToButtons;
+    bool hasSubscribedToInteract;
+
+    public void UpdateMoney(int ammount)
+    {
+        moneyLeft.text = "$" + ammount.ToString();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
 
+    public void HandleItemPurchased(Item newItem)
+    {
+        switch (newItem.myItemClass)
+        {
+            case Item.ItemType.SinglePlank:
+                singlePlank.AddMoreAmmount(1);
+                break;
+            case Item.ItemType.Barrel:
+                barel.AddMoreAmmount(1);
+                break;
+            case Item.ItemType.TriplePlank:
+                triplePlank.AddMoreAmmount(1);
+                break;
+            default:
+                break;
+        }
     }
+
+    public void HandleItemUsed(Item newItem)
+    {
+        switch (newItem.myItemClass)
+        {
+            case Item.ItemType.SinglePlank:
+                singlePlank.RemoveAmmount(1);
+                break;
+            case Item.ItemType.Barrel:
+                barel.RemoveAmmount(1);
+                break;
+            case Item.ItemType.TriplePlank:
+                triplePlank.RemoveAmmount(1);
+                break;
+            default:
+                break;
+        }
+    }
+
+
 }

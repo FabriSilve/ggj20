@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class PlayerBehavior : MonoBehaviour
 {
+    public static Action<Item> OnItemUsed;
     public enum ControlMode
     {
         SinglePlayer,
@@ -43,7 +44,14 @@ public class PlayerBehavior : MonoBehaviour
         // TODO: play error sound
         //}
 
-        Instantiate(barrelPrefab, itemSpawnPoint.transform.position, Quaternion.identity);
+        if (currentItem)
+        {
+            IventoryMenu.Instance.HandleItemUsed(currentItem);
+        }
+
+
+       Instantiate(barrelPrefab, itemSpawnPoint.transform.position, Quaternion.identity);
+
     }
 
     void ControlInput()

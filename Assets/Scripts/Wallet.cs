@@ -28,6 +28,8 @@ public class Wallet : MonoBehaviour
         if (OnCreditUpdated != null)
         {
             OnCreditUpdated(credit);
+
+            IventoryMenu.Instance.UpdateMoney(credit);
         }
         else
         {
