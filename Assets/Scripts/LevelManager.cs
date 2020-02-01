@@ -36,14 +36,20 @@ public class LevelManager : MonoBehaviour
 
         InitializeScales();
 
-        for (int i = 0; i < spawnPointZSize; i++)
+        for (int i = 0; i < 30; i++)
         {
-            for (int y = 0; y < spawnPointXSize; y++)
+            for (int y = 0; y < 30; y++)
             {
 
+
+
                 GameObject spawnPoint = Instantiate(spawnPointPrefab);
-                //TODO fix the name it galls 
-                spawnPoint.name = "SpawnPoint " + (i + y).ToString();
+                //TODO fix the name it galls
+
+
+                // spawnPoint.name = "SpawnPoint " + y + (i * (y / spawnPointXSize)).ToString();
+                spawnPoint.name = ((i * 30) + y).ToString();
+
                 allLevelSpawnPoints[i + y] = spawnPoint.transform;
                 allSpawnPointLogic[i + y] = spawnPoint.GetComponent<SpawnPoint>();
 

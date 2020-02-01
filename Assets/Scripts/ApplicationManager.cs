@@ -6,9 +6,17 @@ public class ApplicationManager : MonoBehaviour
 {
     [SerializeField]
     LevelManager levelManager;
-    private static ApplicationManager _instance;
-    public static ApplicationManager Instance;
 
+
+    private static ApplicationManager _instance;
+    public static ApplicationManager Instance { get { return _instance; } }
+
+    [SerializeField]
+    GameObject playerPrefab;
+
+    GameObject currentPlayer;
+
+    //I need a player ref
 
     private void Awake()
     {
@@ -25,25 +33,67 @@ public class ApplicationManager : MonoBehaviour
 
     [SerializeField]
     private GameObject mainMenu;
-
+    [SerializeField]
+    private GameObject shopMenu;
     public enum GameStatus
     {
         InMenu,
         Playing,
+        Shopping,
         GameOver
     }
+
+    public void OpenShopingMenu()
+    {
+        currentGameStatus = GameStatus.Shopping;
+        UpdateMenus();
+    }
+
+
+    public void CloseShopingMenu()
+    {
+        currentGameStatus = GameStatus.Playing;
+        UpdateMenus();
+    }
+
+
+    void UpdateMenus()
+    {
+        mainMenu.SetActive(currentGameStatus == GameStatus.InMenu);
+        shopMenu.SetActive(currentGameStatus == GameStatus.Shopping);
+
+        if (currentGameStatus == GameStatus.InMenu)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            if (Time.timeScale == 0)
+            {
+                Time.timeScale = 1;
+            }
+        }
+    }
+
     public GameStatus currentGameStatus = GameStatus.InMenu;
 
     public void StartGame()
     {
+        if (!currentPlayer)
+        {
+            levelManager.PopulateTerrain();
+            currentPlayer = Instantiate(playerPrefab, new Vector3(0, 10, 0), Quaternion.identity);
+        }
         CloseMenu();
-        levelManager.PopulateTerrain();
+
+        //Camera.main.transform.parent=player.transform;
+
     }
 
     public void PauseGame()
     {
-        mainMenu.SetActive(currentGameStatus == GameStatus.InMenu);
-        Time.timeScale = 0;
+        currentGameStatus = GameStatus.InMenu;
+        UpdateMenus();
     }
 
     public void EndGame()
@@ -55,8 +105,7 @@ public class ApplicationManager : MonoBehaviour
     void CloseMenu()
     {
         currentGameStatus = GameStatus.Playing;
-        Time.timeScale = 1;
-        mainMenu.SetActive(currentGameStatus == GameStatus.InMenu);
+        UpdateMenus();
 
     }
 
@@ -67,8 +116,9 @@ public class ApplicationManager : MonoBehaviour
 
     public void ToggleMenu()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
+            Debug.Log("Executed");
             if (currentGameStatus == GameStatus.InMenu)
             {
                 CloseMenu();
