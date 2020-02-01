@@ -6,6 +6,15 @@ using System;
 
 public class Item : MonoBehaviour
 {
+    public enum ItemType
+    {
+        SinglePlank,
+        Barrel,
+        TriplePlank
+    }
+
+    private ItemType myItemClass;
+
     public static Action<Item> OnPurchaseMade;
 
     public int ID;
@@ -30,7 +39,11 @@ public class Item : MonoBehaviour
 
     public void Interact()
     {
-
+        switch (myItemClass)
+        {
+            default:
+                break;
+        }
     }
     // Start is called before the first frame update
     private void OnEnable()
