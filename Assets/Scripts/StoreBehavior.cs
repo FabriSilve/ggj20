@@ -1,10 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class StoreBehavior : MonoBehaviour
 {
+
+
     public List<Item> items;
+
+
 
     public int Weight()
     {
@@ -42,7 +46,6 @@ public class StoreBehavior : MonoBehaviour
         {
             return false;
         }
-
     }
 }
 
