@@ -11,16 +11,21 @@ public class Inventory : MonoBehaviour
     float forwardThreshold = 0.01f;
     float backwardThreshold = -0.01f;
 
-    Item currentActiveItem = null;
+    private Item currentActiveItem = null;
+
+    public Item GetActiveItem()
+    {
+        Item itemMock = new Item();
+        itemMock.type = Item.ItemType.SinglePlank;
+        return itemMock;
+    }
 
     void ScrollForActiveItem()
     {
-
         if (Input.GetAxis("Mouse ScrollWheel") != 0)
         {
             float delta = Input.GetAxis("Mouse ScrollWheel");
             Debug.Log("delta: " + delta);
-
 
             if (delta > forwardThreshold)
             {
@@ -30,22 +35,22 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    void UseOfActiveItem()
-    {
-        if (currentActiveItem)
-        {
-            currentActiveItem.Interact();
-        }
-        else
-        {
-            //Play a sound of error
-        }
-    }
+    //void UseOfActiveItem()
+    //{
+    //    if (currentActiveItem)
+    //    {
+    //        currentActiveItem.Interact();
+    //    }
+    //    else
+    //    {
+    //        //Play a sound of error
+    //    }
+    //}
     // Update is called once per frame
     void Update()
     {
         ScrollForActiveItem();
-        UseOfActiveItem();
+        //UseOfActiveItem();
     }
 
     public int Weight()

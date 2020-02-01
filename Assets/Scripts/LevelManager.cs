@@ -93,8 +93,5 @@ public class LevelManager : MonoBehaviour
             //Spawn a Water Tile
             allSpawnPointLogic[randompoint].isOccupied = true;
         }
-
-
-
     }
 }
