@@ -1,11 +1,33 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ApplicationManager : MonoBehaviour
 {
+
+    public float maxAmountOfWaterAllowed = 100;
+    [SerializeField]
+    private float currentAmountOfWater = 0;
+
+
+    //The waterTiles in their Update need to call this method
+
+    //TODO
+    public void AddWater(float amount)
+    {
+        if (currentGameStatus != GameStatus.Playing) return;
+        currentAmountOfWater += amount;
+        if (currentAmountOfWater > maxAmountOfWaterAllowed)
+        {
+            Debug.Log("You lost!");
+            OpenGameOverMenu();
+        }
+    }
+
     [SerializeField]
     LevelManager levelManager;
+
 
 
     private static ApplicationManager _instance;
@@ -35,6 +57,11 @@ public class ApplicationManager : MonoBehaviour
     private GameObject mainMenu;
     [SerializeField]
     private GameObject shopMenu;
+    [SerializeField]
+    private GameObject inventoryMenu;
+    [SerializeField]
+    private GameObject gameOverMenu;
+
     public enum GameStatus
     {
         InMenu,
@@ -56,22 +83,27 @@ public class ApplicationManager : MonoBehaviour
         UpdateMenus();
     }
 
+    public void OpenGameOverMenu() {
+        currentGameStatus = GameStatus.GameOver;
+        UpdateMenus();
+    }
+
 
     void UpdateMenus()
     {
         mainMenu.SetActive(currentGameStatus == GameStatus.InMenu);
         shopMenu.SetActive(currentGameStatus == GameStatus.Shopping);
+        gameOverMenu.SetActive(currentGameStatus == GameStatus.GameOver);
 
-        if (currentGameStatus == GameStatus.InMenu)
+        if (currentGameStatus == GameStatus.InMenu || currentGameStatus == GameStatus.GameOver)
         {
+            Debug.Log("Stopping time...");
             Time.timeScale = 0;
         }
         else
         {
-            if (Time.timeScale == 0)
-            {
-                Time.timeScale = 1;
-            }
+            Debug.Log("Starting time...");
+            Time.timeScale = 1;
         }
     }
 
@@ -79,6 +111,7 @@ public class ApplicationManager : MonoBehaviour
 
     public void StartGame()
     {
+        Debug.Log("Starting game...");
         if (!currentPlayer)
         {
             levelManager.PopulateTerrain();
@@ -88,6 +121,11 @@ public class ApplicationManager : MonoBehaviour
 
         //Camera.main.transform.parent=player.transform;
 
+    }
+
+    public void RestartGame() {
+        Debug.Log("Restarting game...");
+        SceneManager.LoadScene("Level1");
     }
 
     public void PauseGame()
@@ -104,6 +142,7 @@ public class ApplicationManager : MonoBehaviour
 
     void CloseMenu()
     {
+        Debug.Log("Closing menus...");
         currentGameStatus = GameStatus.Playing;
         UpdateMenus();
 

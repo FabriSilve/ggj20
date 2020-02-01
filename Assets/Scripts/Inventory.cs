@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
+    public Transform itemSpawningPlace;
+
     int maxSize = 4;
     private List<Item> storage = new List<Item>();
 
