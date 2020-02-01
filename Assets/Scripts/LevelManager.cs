@@ -66,7 +66,7 @@ public class LevelManager : MonoBehaviour
     }
 
 
-    int timeDelay = 15;
+
 
 
 
