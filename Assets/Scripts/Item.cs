@@ -13,7 +13,8 @@ public class Item : MonoBehaviour
         TriplePlank
     }
 
-    public ItemType myItemClass;
+    public ItemType type;
+
 
     public static Action<Item> OnPurchaseMade;
 
@@ -32,25 +33,8 @@ public class Item : MonoBehaviour
         Debug.Log("Handling the event from button " + this.gameObject.name);
 
         myButton.interactable = credit >= price;
-
     }
 
-
-
-    public void Interact()
-    {
-        switch (myItemClass)
-        {
-            case ItemType.SinglePlank:
-                break;
-            case ItemType.Barrel:
-                break;
-            case ItemType.TriplePlank:
-                break;
-            default:
-                break;
-        }
-    }
     // Start is called before the first frame update
     private void OnEnable()
     {
@@ -74,15 +58,13 @@ public class Item : MonoBehaviour
 
     }
 
-
-
     public void BuyThisItem()
     {
         if (OnPurchaseMade != null)
         {
             OnPurchaseMade(this);
-            IventoryMenu.Instance.HandleItemPurchased(this);
 
+            IventoryMenu.Instance.HandleItemPurchased(this);
 
         }
     }

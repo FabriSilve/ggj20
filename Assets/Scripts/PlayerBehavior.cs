@@ -16,85 +16,55 @@ public class PlayerBehavior : MonoBehaviour
     [SerializeField]
     private CharacterController controller;
 
-    public Item currentItem;
+    [SerializeField]
+    private Inventory inventory;
+
+    [SerializeField]
+    GameObject barrelPrefab;
+
+    GameObject itemSpawnPoint;
 
     void Interact()
     {
-        //if (currentItem)
+        Item item = inventory.GetActiveItem();
+
+        //if (item != null)
         //{
-        //    currentItem.Interact();
+        //    switch (item.type)
+        //    {
+        //        case Item.ItemType.SinglePlank:
+        Debug.Log("using single plank");
+
+        //break;
+
+        //        default:
+        //            break;
+        //    }
+        //} else {
+        // TODO: play error sound
         //}
+
         if (currentItem)
         {
             IventoryMenu.Instance.HandleItemUsed(currentItem);
         }
+
+
+       Instantiate(barrelPrefab, itemSpawnPoint.transform.position, Quaternion.identity);
+
     }
 
-    void ControlPlayerWithArrows()
+    void ControlInput()
     {
         switch (currentcontrolMode)
         {
             case ControlMode.SinglePlayer:
-                //TODO use some sort of controls
-                //TODO Use for now the Keyboard
-                if (Input.GetKeyDown(KeyCode.Q))
+                if (Input.GetKeyDown(KeyCode.E))
                 {
-                    this.transform.position += transform.right * -1;
-                    //Rotate Left
-                }
-                else if (Input.GetKeyDown(KeyCode.E))
-                {
-                    this.transform.position += transform.right;
-
-                    //Rotate Right
-
-                }
-                else if (Input.GetKeyDown(KeyCode.W))
-                {
-                    this.transform.position += transform.forward;
-
-                    //Move Forward
-                }
-                else if (Input.GetKeyDown(KeyCode.S))
-                {
-                    this.transform.position += transform.forward * -1;
-
-                    //Move Backwards
-
-                }
-                else if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    //Interact
-                }
-                break;
-
-            case ControlMode.CoOp:
-                //TODO do the same but split the parts.
-                if (Input.GetKeyDown(KeyCode.Q))
-                {
-                    //Rotate Left
-                }
-                else if (Input.GetKeyDown(KeyCode.E))
-                {
-                    //Rotate Right
-
-                }
-                else if (Input.GetKeyDown(KeyCode.W))
-                {
-                    //Move Forward
-                }
-                else if (Input.GetKeyDown(KeyCode.S))
-                {
-                    //Move Backwards
-
-                }
-                else if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    //Interact
                     Interact();
                 }
-
                 break;
+
             default:
                 break;
         }
@@ -105,10 +75,14 @@ public class PlayerBehavior : MonoBehaviour
     {
         // Store reference to attached components
         controller = GetComponent<CharacterController>();
+        inventory = GetComponent<Inventory>();
+
+        itemSpawnPoint = GameObject.Find("ItemSpawnPoint");
     }
 
     // Update is called once per frame
     void Update()
     {
+        ControlInput();
     }
 }
