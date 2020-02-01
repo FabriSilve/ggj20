@@ -22,7 +22,7 @@ public class Spawnable : MonoBehaviour
         }
     }
 
-    bool Spawn(Transform transform) {
+    public bool Spawn(Transform transform) {
         return Spawn(transform, _ => _);
     }
 
