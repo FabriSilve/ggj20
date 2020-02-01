@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.5748171, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 20400848}
   - component: {fileID: 20400847}
   - component: {fileID: 20400853}
+  - component: {fileID: 20400854}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -174,7 +175,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentcontrolMode: 0
-  movementSpeed: 50
+  controller: {fileID: 0}
+  inventory: {fileID: 0}
   currentItem: {fileID: 0}
 --- !u!136 &20400849
 CapsuleCollider:
@@ -264,6 +266,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSize: 10
+--- !u!114 &20400854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 20400846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b44d46110fa9d0439d81620e4cc9851, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseMovementSpeed: 50
+  controller: {fileID: 0}
+  inventory: {fileID: 0}
 --- !u!1 &92984997
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,6 +403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca2ad7a3b67e641fdb66ebf7e6788bb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManager: {fileID: 0}
   mainMenu: {fileID: 1704626853}
   currentGameStatus: 0
 --- !u!4 &433233783
@@ -1006,8 +1024,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1265852782}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -285.62015, z: 0.0000328944}
+  m_LocalRotation: {x: 0.024064448, y: 0.92902887, z: 0.36408192, w: -0.061405245}
+  m_LocalPosition: {x: 22.411274, y: -182.439, z: 214.43152}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1368,7 +1386,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c2e0e496f4974dd8aaf2e05801baf35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allPoints: []
 --- !u!4 &1804414766
 Transform:
   m_ObjectHideFlags: 0
