@@ -36,14 +36,7 @@ public class ApplicationManager : MonoBehaviour
 
     public void StartGame()
     {
-        currentGameStatus = GameStatus.Playing;
-
-        //TODO Hide the Menu,
-        //Spawn the Player,
-        //Let the LevelManager Know what to do.
-        mainMenu.SetActive(currentGameStatus == GameStatus.InMenu);
-        Time.timeScale = 1;
-
+        CloseMenu();
         levelManager.PopulateTerrain();
     }
 
@@ -59,4 +52,32 @@ public class ApplicationManager : MonoBehaviour
     }
     // Start is called before the first frame update
 
+    void CloseMenu()
+    {
+        currentGameStatus = GameStatus.Playing;
+        Time.timeScale = 1;
+        mainMenu.SetActive(currentGameStatus == GameStatus.InMenu);
+
+    }
+
+    private void Update()
+    {
+        ToggleMenu();
+    }
+
+    public void ToggleMenu()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (currentGameStatus == GameStatus.InMenu)
+            {
+                CloseMenu();
+            }
+            else if (currentGameStatus == GameStatus.Playing)
+            {
+                PauseGame();
+            }
+
+        }
+    }
 }
