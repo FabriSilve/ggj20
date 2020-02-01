@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField]
     private CharacterController controller;
+    [SerializeField]
+    private Inventory inventory;
 
     private void ControlPlayer()
     {
@@ -21,10 +23,18 @@ public class PlayerMovement : MonoBehaviour
         gravity = controller.isGrounded ? 0 : gravity - (9.81f * Time.deltaTime);
     }
 
+    private float SpeedMultiplier() {
+        int weight = inventory.Weight();
+        // Super simple formula to linearly decrease player speed based on inventory weight.
+        float speedMultiplier = baseMovementSpeed - Mathf.Min(baseMovementSpeed/2, weight);
+        return speedMultiplier;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        inventory = GetComponent<Inventory>();
     }
 
     // Update is called once per frame

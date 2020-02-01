@@ -14,8 +14,6 @@ public class PlayerBehavior : MonoBehaviour
 
     [SerializeField]
     private CharacterController controller;
-    [SerializeField]
-    private Inventory inventory;
 
     public Item currentItem;
 
@@ -97,19 +95,11 @@ public class PlayerBehavior : MonoBehaviour
         }
     }
 
-    private float SpeedMultiplier() {
-        int weight = inventory.Weight();
-        // Super simple formula to linearly decrease player speed based on inventory weight.
-        float speedMultiplier = baseMovementSpeed - Mathf.Min(baseMovementSpeed/2, weight);
-        return speedMultiplier;
-    }
-
     // Start is called before the first frame update
     void Start()
     {
         // Store reference to attached components
         controller = GetComponent<CharacterController>();
-        inventory = GetComponent<Inventory>();
     }
 
     // Update is called once per frame
