@@ -12,14 +12,10 @@ public class PlayerBehavior : MonoBehaviour
 
     public ControlMode currentcontrolMode;
 
-    public float baseMovementSpeed = 50f;
-
     [SerializeField]
     private CharacterController controller;
     [SerializeField]
     private Inventory inventory;
-
-    private float gravity = 0;
 
     public Item currentItem;
 
@@ -29,12 +25,6 @@ public class PlayerBehavior : MonoBehaviour
         //{
         //    currentItem.Interact();
         //}
-    }
-
-    void ControlPlayer()
-    {        
-        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), gravity, Input.GetAxis("Vertical"));
-        controller.Move(move * Time.deltaTime * baseMovementSpeed);
     }
 
     void ControlPlayerWithArrows()
@@ -73,11 +63,8 @@ public class PlayerBehavior : MonoBehaviour
                 {
                     //Interact
                 }
-
-
-
-
                 break;
+
             case ControlMode.CoOp:
                 //TODO do the same but split the parts.
                 if (Input.GetKeyDown(KeyCode.Q))
@@ -116,10 +103,6 @@ public class PlayerBehavior : MonoBehaviour
         // baseMovementSpeed
     }
 
-    private void ComputeGravity() {
-        gravity = controller.isGrounded ? 0 : gravity - (9.81f * Time.deltaTime);
-    }
-
     // Start is called before the first frame update
     void Start()
     {
@@ -131,7 +114,5 @@ public class PlayerBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ComputeGravity();
-        ControlPlayer();
     }
 }
