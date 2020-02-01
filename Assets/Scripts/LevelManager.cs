@@ -61,7 +61,7 @@ public class LevelManager : MonoBehaviour
                 // spawnPoint.name = "SpawnPoint " + j + (i * (j / spawnPointXSize)).ToString();
                 spawnPoint.name = ((i * spawnPointZSize) + j).ToString();
 
-                allLevelSpawnPoints[i + j] = spawnPoint.transform;
+                allLevelSpawnPoints[(i * spawnPointZSize) + j] = spawnPoint.transform;
                 SpawnPoint spawnPointComponent = spawnPoint.GetComponent<SpawnPoint>();
 
                 grid[i,j] = spawnPointComponent;
@@ -85,10 +85,10 @@ public class LevelManager : MonoBehaviour
     {
             if (direction == CellConnections.left)
             {
-                return j - 1 > 0 ? grid[i, j-1] : null;
+                return j - 1 >= 0 ? grid[i, j-1] : null;
             }
             if (direction == CellConnections.top){
-                return i - 1 > 0 ? grid[i-1, j] : null;
+                return i - 1 >= 0 ? grid[i-1, j] : null;
             }
             if (direction == CellConnections.right)
             {
@@ -122,11 +122,15 @@ public class LevelManager : MonoBehaviour
         {
             for (int j = 0; j < spawnPointXSize; j++)
             {
+                Debug.Log(grid[i, j].weight);
                 position = position - grid[i, j].weight;
                 if (position < 0)
                 {
-                    addWeightToAllNeighbors(i, j, 4);
-                    return allLevelSpawnPoints[i + j];
+                    grid[i, j].weight = 0;
+                    totalWeight -= 1;
+                    addWeightToAllNeighbors(i, j, 400);
+                    Debug.Log(i + j);
+                    return allLevelSpawnPoints[(i * spawnPointZSize) + j];
                 }
             }
 
@@ -152,6 +156,7 @@ public class LevelManager : MonoBehaviour
     {
         int randompoint = Random.Range(0, this.totalWeight);
         Transform itemPosition = findCellWithWeights(randompoint);
-        // holeSpawner.Spawn(itemPosition);
+        holeSpawner.Spawn(itemPosition);
+        GameObject.Destroy(itemPosition.gameObject);
     }
 }
