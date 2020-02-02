@@ -18,8 +18,9 @@ public class LevelManager : MonoBehaviour
     public int spawnPointXSize;
     public int spawnPointZSize;
 
-    public int numberOfHoles;
-    public int totalWeight;
+    public int weightNeighbors = 4;
+    private int numberOfHoles;
+    private int totalWeight;
 
     public GameObject holeSpawnerGameObject;
     private Spawnable holeSpawner;
@@ -28,13 +29,13 @@ public class LevelManager : MonoBehaviour
         holeSpawner = holeSpawnerGameObject.GetComponent<Spawnable>();
     }
 
-    Transform[] allLevelSpawnPoints;
+    Transform[,] allLevelSpawnPoints;
     void InitializeScales()
     {
         spawnPointXSize = (int)(baseTerrain.transform.localScale.x / spawnPointPrefab.transform.localScale.x);
         spawnPointZSize = (int)(baseTerrain.transform.localScale.z / spawnPointPrefab.transform.localScale.z);
         totalWeight = spawnPointXSize * spawnPointZSize;
-        allLevelSpawnPoints = new Transform[spawnPointXSize * spawnPointZSize];
+        allLevelSpawnPoints = new Transform[spawnPointZSize, spawnPointXSize];
         grid = new SpawnPoint[spawnPointXSize, spawnPointZSize];
     }
 
@@ -61,7 +62,7 @@ public class LevelManager : MonoBehaviour
                 // spawnPoint.name = "SpawnPoint " + j + (i * (j / spawnPointXSize)).ToString();
                 spawnPoint.name = ((i * spawnPointZSize) + j).ToString();
 
-                allLevelSpawnPoints[(i * spawnPointZSize) + j] = spawnPoint.transform;
+                allLevelSpawnPoints[i, j] = spawnPoint.transform;
                 SpawnPoint spawnPointComponent = spawnPoint.GetComponent<SpawnPoint>();
 
                 grid[i,j] = spawnPointComponent;
@@ -115,7 +116,7 @@ public class LevelManager : MonoBehaviour
         PlayerPrefs.SetInt("Score", xpAmmount);
     }
 
-    int findCellWithWeights(int n)
+    KeyValuePair<int, int> findCellWithWeights(int n)
     {
         int position = n;
         for (int i = 0; i < spawnPointZSize; i++)
@@ -128,14 +129,14 @@ public class LevelManager : MonoBehaviour
                 {
                     grid[i, j].weight = 0;
                     totalWeight -= 1;
-                    addWeightToAllNeighbors(i, j, 400);
+                    addWeightToAllNeighbors(i, j, weightNeighbors);
                     Debug.Log(i + j);
-                    return (i * spawnPointZSize) + j;
+                    return new KeyValuePair<int, int>(i, j);
                 }
             }
 
         }
-        return -1;
+        return new KeyValuePair<int, int>(-1, -1) ;
     }
     void addWeightToAllNeighbors(int i, int j, int weight)
     {
@@ -155,14 +156,14 @@ public class LevelManager : MonoBehaviour
     void CheckSpawner()
     {
         int randompoint = Random.Range(0, this.totalWeight);
-        int itemPosition = findCellWithWeights(randompoint);
-        if (itemPosition < 0)
+        KeyValuePair<int, int> pairPosition = findCellWithWeights(randompoint);
+        if (pairPosition.Key < 0 || pairPosition.Value<0)
         {
             return;
         }
-        Transform oldTransform = allLevelSpawnPoints[itemPosition];
+        Transform oldTransform = allLevelSpawnPoints[pairPosition.Key, pairPosition.Value];
         Transform newTransform = holeSpawner.Spawn(oldTransform);
         GameObject.Destroy(oldTransform.gameObject);
-        allLevelSpawnPoints[itemPosition] = newTransform;
+        allLevelSpawnPoints[pairPosition.Key, pairPosition.Value] = newTransform;
     }
 }
