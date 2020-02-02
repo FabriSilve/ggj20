@@ -44,7 +44,9 @@ public class PlayerBehavior : MonoBehaviour
 
             //IventoryMenu.Instance.HandleItemUsed(item);
 
-            Instantiate(barrelPrefab, tile.transform.position, Quaternion.identity);
+            Vector3 barrelPosition = new Vector3(tile.transform.position.x, tile.transform.position.y, tile.transform.position.z);
+            Instantiate(barrelPrefab, barrelPosition, Quaternion.identity);
+
             //break;
 
             //        default:
