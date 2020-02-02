@@ -24,6 +24,8 @@ public class PlayerBehavior : MonoBehaviour
 
     GameObject itemSpawnPoint;
 
+    public LevelManager levelManager;
+
     private CurrentTileDetector tileDetector;
 
     void Interact()
@@ -37,7 +39,7 @@ public class PlayerBehavior : MonoBehaviour
         //        case Item.ItemType.SinglePlank:
         Debug.Log("using single plank");
         Debug.Log(tileDetector.GetCurrentTile());
-
+        levelManager.FixTile(tileDetector.GetCurrentTile());
         //break;
 
         //        default:
