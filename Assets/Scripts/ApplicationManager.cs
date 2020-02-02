@@ -10,7 +10,7 @@ public class ApplicationManager : MonoBehaviour
     [SerializeField]
     private float currentAmountOfWater = 0;
     [SerializeField]
-    private float elapsedTime = 0;
+    private float progress = 0;
     public float endOfProgress = 100;
 
 
@@ -110,6 +110,10 @@ public class ApplicationManager : MonoBehaviour
 
     public GameStatus currentGameStatus = GameStatus.InMenu;
 
+    public float GetProgress() {
+        return (float)progress/(float)endOfProgress;
+    }
+
     public void StartGame()
     {
         if (!currentPlayer)
@@ -124,7 +128,6 @@ public class ApplicationManager : MonoBehaviour
     }
 
     public void RestartGame() {
-        Debug.Log("Restarting game...");
         SceneManager.LoadScene("Level1");
     }
 
@@ -157,8 +160,8 @@ public class ApplicationManager : MonoBehaviour
     //TODO: Score should not just be a function of the elapsed time.
     public void UpdateScore() {
         if (currentGameStatus == GameStatus.Playing) {
-            elapsedTime += Time.deltaTime;
-            inventoryMenu.transform.Find("Score").GetComponent<TMPro.TextMeshProUGUI>().text = "Score: " + (int)elapsedTime;
+            progress += Time.deltaTime;
+            inventoryMenu.transform.Find("Score").GetComponent<TMPro.TextMeshProUGUI>().text = "Score: " + (int)progress;
         }
     }
 
