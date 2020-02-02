@@ -172,8 +172,9 @@ public class LevelManager : MonoBehaviour
         addWeightToAllNeighbors(i, j, weightNeighbors);
     }
 
-    void fixTile(GameObject brokenTile)
+    public void FixTile(GameObject brokenTile)
     {
+        Debug.Log("tile fixed");
         SpawnPoint spawnPoint = brokenTile.GetComponent<SpawnPoint>();
         spawnPoint.weight = 1; // we reset the weight
         Transform oldTransform = allLevelSpawnPoints[spawnPoint.column, spawnPoint.line];
