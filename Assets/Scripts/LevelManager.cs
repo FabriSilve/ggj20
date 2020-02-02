@@ -48,7 +48,7 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
-        InvokeRepeating("CheckSpawner", 2.0f, 2f);
+        InvokeRepeating("CheckSpawner", 5.0f, 2f);
     }
     public void PopulateTerrain()
     {
@@ -204,8 +204,9 @@ public class LevelManager : MonoBehaviour
         grid[pairPosition.Key, pairPosition.Value] = newTransform.GetComponent<SpawnPoint>();
 
         //Those complain
-
+        Debug.Log(newTransform.GetComponent<SpawnPoint>());
         newTransform.GetComponent<SpawnPoint>().column = pairPosition.Key;
         newTransform.GetComponent<SpawnPoint>().line = pairPosition.Value;
+       // FixTile(newTransform.gameObject);
     }
 }

@@ -41,6 +41,7 @@ public class Spawnable : MonoBehaviour
             StartCoroutine(DisposeObjectAfter(inactivePooledObject, lifetime));
             return inactivePooledObject.transform;
         } else {
+            Debug.Log("Van't return spawn");
             return null;
         }
     }
