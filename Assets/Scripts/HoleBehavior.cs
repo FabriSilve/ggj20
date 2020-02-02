@@ -9,6 +9,10 @@ public class HoleBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ApplicationManager.Instance.AddWater(Time.deltaTime * sinkingMultiplier);
+        if (this.gameObject.activeInHierarchy)
+        {
+            ApplicationManager.Instance.AddWater(Time.deltaTime * sinkingMultiplier);
+
+        }
     }
 }

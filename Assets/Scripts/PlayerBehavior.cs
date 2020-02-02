@@ -10,6 +10,19 @@ public class PlayerBehavior : MonoBehaviour
         SinglePlayer,
         CoOp
     }
+    AudioSource errorSound;
+
+    public IventoryMenu invMenu;
+
+    private void Awake()
+    {
+        //Place this
+        //        errorSound = GameObject.Find("ErrorAudio").GetComponent<AudioSource>();
+
+        invMenu = GameObject.Find("InventoryMenu").GetComponent<IventoryMenu>();
+
+
+    }
 
     public ControlMode currentcontrolMode;
 
@@ -33,29 +46,31 @@ public class PlayerBehavior : MonoBehaviour
         Item item = inventory.GetActiveItem();
         GameObject tile = tileDetector.GetCurrentTile();
 
-        Debug.Log("Interact with " + item + " and " + tile);
+        //Debug.Log("Interact with " + item + " and " + tile);
 
-        if (tile != null)
+        if (!invMenu)
         {
-            //switch (item.type)
-            //{
-            //    case Item.ItemType.SinglePlank:
+            invMenu = GameObject.Find("InventoryMenu").GetComponent<IventoryMenu>();
+
+        }
+
+        if (tile != null && invMenu.barrelsAvailable > 0)
+        {
+
+
             GameObject newTile = levelManager.FixTile(tile);
             newTile.GetComponent<SpawnPoint>().state = State.occupied;
 
-            //IventoryMenu.Instance.HandleItemUsed(item);
 
             Vector3 barrelPosition = new Vector3(tile.transform.position.x, tile.transform.position.y, tile.transform.position.z);
             Instantiate(barrelPrefab, barrelPosition, Quaternion.identity);
 
-            //break;
 
-            //        default:
-            //            break;
-            //    }
-            //} else {
-            // TODO: play error sound
-            //}
+            invMenu.UseBarel();
+        }
+        else
+        {
+            Debug.Log("Tile is null");
         }
     }
 

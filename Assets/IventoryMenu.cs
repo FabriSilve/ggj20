@@ -17,6 +17,7 @@ public class IventoryMenu : MonoBehaviour
         }
 
     }
+    public int barrelsAvailable = 2;
 
     [SerializeField]
     InventoryUIItem singlePlank;
@@ -31,9 +32,6 @@ public class IventoryMenu : MonoBehaviour
     [SerializeField]
     TMPro.TextMeshProUGUI moneyLeft;
 
-
-    bool hasSubscribedToButtons;
-    bool hasSubscribedToInteract;
 
     public void UpdateMoney(int ammount)
     {
@@ -50,6 +48,7 @@ public class IventoryMenu : MonoBehaviour
                 break;
             case Item.ItemType.Barrel:
                 barel.AddMoreAmmount(1);
+                barrelsAvailable++;
                 break;
             case Item.ItemType.TriplePlank:
                 triplePlank.AddMoreAmmount(1);
@@ -57,6 +56,12 @@ public class IventoryMenu : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public void UseBarel()
+    {
+        barel.RemoveAmmount(1);
+        barrelsAvailable--;
     }
 
     public void HandleItemUsed(Item newItem)
@@ -68,6 +73,7 @@ public class IventoryMenu : MonoBehaviour
                 break;
             case Item.ItemType.Barrel:
                 barel.RemoveAmmount(1);
+                barrelsAvailable--;
                 break;
             case Item.ItemType.TriplePlank:
                 triplePlank.RemoveAmmount(1);
@@ -76,6 +82,5 @@ public class IventoryMenu : MonoBehaviour
                 break;
         }
     }
-
 
 }
