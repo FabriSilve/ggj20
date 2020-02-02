@@ -21,5 +21,7 @@ public class SpawnPoint : MonoBehaviour
 {
     public State state = State.empty;
     public int weight = 1;
+    public int column;
+    public int line;
 
 }
