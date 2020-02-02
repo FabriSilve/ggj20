@@ -6,12 +6,14 @@ using UnityEngine.UI;
 public class ShipHudManager : MonoBehaviour
 {
     public UnityEngine.UI.Image image;
-    public int padding; // Padding between ship image and the border of the screen
+    [SerializeField]
+    private float shipWidth;
 
     private float elapsedTime;
 
     void Awake() {
         image = GetComponent<UnityEngine.UI.Image>();
+        shipWidth = image.rectTransform.rect.width;
     } 
 
     void Start()
@@ -23,7 +25,7 @@ public class ShipHudManager : MonoBehaviour
     {
         image.enabled = ApplicationManager.Instance.currentGameStatus == ApplicationManager.GameStatus.Playing;
 
-        float newX = Screen.width * ApplicationManager.Instance.GetProgress();
+        float newX = shipWidth / 2 + (Screen.width - shipWidth) * ApplicationManager.Instance.GetProgress();
         transform.position = new Vector3(newX, transform.position.y, transform.position.z);
     }
 }
