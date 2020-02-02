@@ -123,21 +123,20 @@ public class LevelManager : MonoBehaviour
         {
             for (int j = 0; j < spawnPointXSize; j++)
             {
-                Debug.Log(grid[i, j].weight);
-                position = position - grid[i, j].weight;
-                if (position < 0)
-                {
-                    grid[i, j].weight = 0;
-                    totalWeight -= 1;
-                    addWeightToAllNeighbors(i, j, weightNeighbors);
-                    Debug.Log(i + j);
-                    return new KeyValuePair<int, int>(i, j);
+                if (grid[i, j].state == State.empty) {
+                    position = position - grid[i, j].weight;
+                    if (position < 0)
+                    {
+                        return new KeyValuePair<int, int>(i, j);
+                    }
+
                 }
             }
 
         }
         return new KeyValuePair<int, int>(-1, -1) ;
     }
+
     void addWeightToAllNeighbors(int i, int j, int weight)
     {
         Neighbors[] listSides = new Neighbors[] { Neighbors.left, Neighbors.right, Neighbors.top, Neighbors.down };
@@ -153,6 +152,14 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    void equalizeWeights(int i, int j )
+    {
+        grid[i, j].weight = 0;
+        grid[i, j].state = State.broken;
+        totalWeight -= 1;
+        addWeightToAllNeighbors(i, j, weightNeighbors);
+    }
+
     void CheckSpawner()
     {
         int randompoint = Random.Range(0, this.totalWeight);
@@ -161,6 +168,7 @@ public class LevelManager : MonoBehaviour
         {
             return;
         }
+        equalizeWeights(pairPosition.Key, pairPosition.Value);
         Transform oldTransform = allLevelSpawnPoints[pairPosition.Key, pairPosition.Value];
         Transform newTransform = holeSpawner.Spawn(oldTransform);
         GameObject.Destroy(oldTransform.gameObject);
