@@ -167,7 +167,7 @@ public class LevelManager : MonoBehaviour
         addWeightToAllNeighbors(i, j, weightNeighbors);
     }
 
-    public void FixTile(GameObject brokenTile)
+    public GameObject FixTile(GameObject brokenTile)
     {
         Debug.Log("tile fixed");
         SpawnPoint spawnPoint = brokenTile.GetComponent<SpawnPoint>();
@@ -179,6 +179,7 @@ public class LevelManager : MonoBehaviour
         grid[spawnPoint.column, spawnPoint.line] = newTransform.GetComponent<SpawnPoint>();
         newTransform.GetComponent<SpawnPoint>().column = spawnPoint.column;
         newTransform.GetComponent<SpawnPoint>().line = spawnPoint.line;
+        return newTransform.gameObject;
     }
 
     void CheckSpawner()

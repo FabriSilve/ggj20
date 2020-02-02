@@ -40,7 +40,8 @@ public class PlayerBehavior : MonoBehaviour
             //switch (item.type)
             //{
             //    case Item.ItemType.SinglePlank:
-            levelManager.FixTile(tile);
+            GameObject newTile = levelManager.FixTile(tile);
+            newTile.GetComponent<SpawnPoint>().state = State.occupied;
 
             //IventoryMenu.Instance.HandleItemUsed(item);
 
