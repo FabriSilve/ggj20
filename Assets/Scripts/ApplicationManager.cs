@@ -100,12 +100,10 @@ public class ApplicationManager : MonoBehaviour
 
         if (currentGameStatus == GameStatus.InMenu || currentGameStatus == GameStatus.GameOver)
         {
-            Debug.Log("Stopping time...");
             Time.timeScale = 0;
         }
         else
         {
-            Debug.Log("Starting time...");
             Time.timeScale = 1;
         }
     }
@@ -114,7 +112,6 @@ public class ApplicationManager : MonoBehaviour
 
     public void StartGame()
     {
-        Debug.Log("Starting game...");
         if (!currentPlayer)
         {
             levelManager.PopulateTerrain();
