@@ -27,7 +27,7 @@ public class Inventory : MonoBehaviour
         if (Input.GetAxis("Mouse ScrollWheel") != 0)
         {
             float delta = Input.GetAxis("Mouse ScrollWheel");
-            Debug.Log("delta: " + delta);
+            //Debug.Log("delta: " + delta);
 
             if (delta > forwardThreshold)
             {
