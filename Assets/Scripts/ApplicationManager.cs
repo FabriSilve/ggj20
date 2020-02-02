@@ -13,6 +13,8 @@ public class ApplicationManager : MonoBehaviour
     private float progress = 0;
     public float endOfProgress = 100;
 
+    public GameObject water;
+
 
     //The waterTiles in their Update need to call this method
 
@@ -21,6 +23,7 @@ public class ApplicationManager : MonoBehaviour
     {
         if (currentGameStatus != GameStatus.Playing) return;
         currentAmountOfWater += amount;
+        water.GetComponent<WaterLevelManager>().IncreaseWaterLevel();
         if (currentAmountOfWater > maxAmountOfWaterAllowed)
         {
             Debug.Log("You lost!");
