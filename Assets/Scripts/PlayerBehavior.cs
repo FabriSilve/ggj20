@@ -24,6 +24,8 @@ public class PlayerBehavior : MonoBehaviour
 
     GameObject itemSpawnPoint;
 
+    private CurrentTileDetector tileDetector;
+
     void Interact()
     {
         Item item = inventory.GetActiveItem();
@@ -34,6 +36,7 @@ public class PlayerBehavior : MonoBehaviour
         //    {
         //        case Item.ItemType.SinglePlank:
         Debug.Log("using single plank");
+        Debug.Log(tileDetector.GetCurrentTile());
 
         //break;
 
@@ -49,9 +52,7 @@ public class PlayerBehavior : MonoBehaviour
             IventoryMenu.Instance.HandleItemUsed(item);
         }
 
-
-       Instantiate(barrelPrefab, itemSpawnPoint.transform.position, Quaternion.identity);
-
+        Instantiate(barrelPrefab, itemSpawnPoint.transform.position, Quaternion.identity);
     }
 
     void ControlInput()
@@ -78,6 +79,7 @@ public class PlayerBehavior : MonoBehaviour
         inventory = GetComponent<Inventory>();
 
         itemSpawnPoint = GameObject.Find("ItemSpawnPoint");
+        tileDetector = itemSpawnPoint.GetComponent<CurrentTileDetector>();
     }
 
     // Update is called once per frame

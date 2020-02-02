@@ -122,14 +122,14 @@ public class LevelManager : MonoBehaviour
         {
             for (int j = 0; j < spawnPointXSize; j++)
             {
-                Debug.Log(grid[i, j].weight);
+                //Debug.Log(grid[i, j].weight);
                 position = position - grid[i, j].weight;
                 if (position < 0)
                 {
                     grid[i, j].weight = 0;
                     totalWeight -= 1;
                     addWeightToAllNeighbors(i, j, 400);
-                    Debug.Log(i + j);
+                    //Debug.Log(i + j);
                     return (i * spawnPointZSize) + j;
                 }
             }
