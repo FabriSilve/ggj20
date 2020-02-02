@@ -4,6 +4,10 @@ using UnityEngine;
 using System;
 public class PlayerBehavior : MonoBehaviour
 {
+    [SerializeField]
+    AudioSource ErrorSound;
+
+
     public static Action<Item> OnItemUsed;
     public enum ControlMode
     {
@@ -70,7 +74,13 @@ public class PlayerBehavior : MonoBehaviour
         }
         else
         {
-            Debug.Log("Tile is null");
+
+            if (errorSound.isPlaying)
+            {
+                errorSound.Stop();
+
+            }
+            errorSound.Play();
         }
     }
 

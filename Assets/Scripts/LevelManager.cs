@@ -29,7 +29,8 @@ public class LevelManager : MonoBehaviour
     public GameObject tileSpawnerGameObject;
     private Spawnable tileSpawner;
 
-    void Awake() {
+    void Awake()
+    {
         holeSpawner = holeSpawnerGameObject.GetComponent<Spawnable>();
         tileSpawner = tileSpawnerGameObject.GetComponent<Spawnable>();
     }
@@ -48,7 +49,7 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
-        InvokeRepeating("CheckSpawner", 5.0f, 2f);
+        InvokeRepeating("CheckSpawner", 5.0f, 4f);
     }
     public void PopulateTerrain()
     {
@@ -149,7 +150,8 @@ public class LevelManager : MonoBehaviour
         foreach (Neighbors side in listSides)
         {
             SpawnPoint neighbor = getNeighbor(i, j, side);
-            if (neighbor != null) {
+            if (neighbor != null)
+            {
                 if (neighbor.weight > 0 && neighbor.state == State.empty)
                 {
                     neighbor.weight += weight;

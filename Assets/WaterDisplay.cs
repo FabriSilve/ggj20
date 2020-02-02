@@ -15,10 +15,21 @@ public class WaterDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float percent = ApplicationManager.Instance.currentAmountOfWater / ApplicationManager.Instance.maxAmountOfWaterAllowed;
+        if (ApplicationManager.Instance.currentGameStatus == ApplicationManager.GameStatus.Playing)
+        {
+            float percent = ApplicationManager.Instance.currentAmountOfWater / ApplicationManager.Instance.maxAmountOfWaterAllowed;
 
-        percent = 100 - (percent * 100);
+            if (percent >= 0)
+            {
 
-        waterText.text = percent.ToString("F2") + "%";
+                percent = 100 - (percent * 100);
+
+                waterText.text = percent.ToString("F2") + "%";
+            }
+        }
+
+
+
+
     }
 }

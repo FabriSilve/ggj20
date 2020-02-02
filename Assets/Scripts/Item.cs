@@ -27,6 +27,8 @@ public class Item : MonoBehaviour
 
     bool hasSubscribedToEvent;
 
+    [SerializeField]
+    AudioSource puchaseSound;
 
     void HandleCreditUpdated(int credit)
     {
@@ -66,6 +68,11 @@ public class Item : MonoBehaviour
 
             IventoryMenu.Instance.HandleItemPurchased(this);
 
+            if (puchaseSound.isPlaying)
+            {
+                //  puchaseSound.Stop();
+            }
+            puchaseSound.Play();
         }
     }
 }

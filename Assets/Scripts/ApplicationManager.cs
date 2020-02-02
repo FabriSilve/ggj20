@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class ApplicationManager : MonoBehaviour
 {
+    [SerializeField]
+    GameObject winningMenu;
 
     public float maxAmountOfWaterAllowed = 100;
     public float currentAmountOfWater = 0;
@@ -73,7 +75,8 @@ public class ApplicationManager : MonoBehaviour
         InMenu,
         Playing,
         Shopping,
-        GameOver
+        GameOver,
+        Won
     }
 
     public void OpenShopingMenu()
@@ -114,9 +117,13 @@ public class ApplicationManager : MonoBehaviour
 
     public GameStatus currentGameStatus = GameStatus.InMenu;
 
+    float levelProgress;
+
     public float GetProgress()
     {
-        return (float)progress / (float)endOfProgress;
+        levelProgress = (float)progress / (float)endOfProgress;
+
+        return levelProgress;
     }
 
     public void StartGame()
@@ -162,6 +169,23 @@ public class ApplicationManager : MonoBehaviour
     {
         UpdateScore();
         ToggleMenu();
+
+        RemoveSomeWater();
+
+        if (levelProgress >= 1)
+        {
+            //We win
+            currentGameStatus = GameStatus.Won;
+            winningMenu.SetActive(true);
+        }
+    }
+
+    void RemoveSomeWater()
+    {
+        if (currentAmountOfWater > 0)
+        {
+            currentAmountOfWater -= 0.01f;
+        }
     }
 
     //TODO: Score should not just be a function of the elapsed time.
