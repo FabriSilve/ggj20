@@ -120,6 +120,7 @@ public class ApplicationManager : MonoBehaviour
         {
             levelManager.PopulateTerrain();
             currentPlayer = Instantiate(playerPrefab, new Vector3(0, 6, 0), Quaternion.identity);
+            currentPlayer.GetComponent<PlayerBehavior>().levelManager = levelManager;
         }
         CloseMenu();
 
