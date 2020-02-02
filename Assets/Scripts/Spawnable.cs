@@ -22,15 +22,15 @@ public class Spawnable : MonoBehaviour
         }
     }
 
-    public bool Spawn(Transform transform) {
+    public Transform Spawn(Transform transform) {
         return Spawn(transform, _ => _);
     }
 
-    bool Spawn(Transform transform, System.Func<GameObject, GameObject> setup) {
+    Transform Spawn(Transform transform, System.Func<GameObject, GameObject> setup) {
         return Spawn(transform, setup, defaultObjectLifetime);
     }
 
-    bool Spawn(Transform transform, System.Func<GameObject, GameObject> setup, int lifetime) {
+    Transform Spawn(Transform transform, System.Func<GameObject, GameObject> setup, int lifetime) {
         GameObject inactivePooledObject = pool.Find(i => !i.activeInHierarchy);
 
         if (inactivePooledObject != null) {
@@ -39,9 +39,9 @@ public class Spawnable : MonoBehaviour
             setup(inactivePooledObject);
             inactivePooledObject.SetActive(true);
             StartCoroutine(DisposeObjectAfter(inactivePooledObject, lifetime));
-            return true;
+            return inactivePooledObject.transform;
         } else {
-            return false;
+            return null;
         }
     }
 

@@ -81,20 +81,20 @@ public class LevelManager : MonoBehaviour
 
 
 
-    SpawnPoint getNeighbor(int i, int j, CellConnections direction)
+    SpawnPoint getNeighbor(int i, int j, Neighbors neighbor)
     {
-            if (direction == CellConnections.left)
+            if (neighbor == Neighbors.left)
             {
                 return j - 1 >= 0 ? grid[i, j-1] : null;
             }
-            if (direction == CellConnections.top){
+            if (neighbor == Neighbors.top){
                 return i - 1 >= 0 ? grid[i-1, j] : null;
             }
-            if (direction == CellConnections.right)
+            if (neighbor == Neighbors.right)
             {
                 return j + 1 < spawnPointXSize ? grid[i, j+1] : null;
             }
-            if (direction == CellConnections.down)
+            if (neighbor == Neighbors.down)
             {
                 return i + 1 < spawnPointZSize ? grid[i + 1, j] : null;
             }
@@ -115,7 +115,7 @@ public class LevelManager : MonoBehaviour
         PlayerPrefs.SetInt("Score", xpAmmount);
     }
 
-    Transform findCellWithWeights(int n)
+    int findCellWithWeights(int n)
     {
         int position = n;
         for (int i = 0; i < spawnPointZSize; i++)
@@ -130,17 +130,17 @@ public class LevelManager : MonoBehaviour
                     totalWeight -= 1;
                     addWeightToAllNeighbors(i, j, 400);
                     Debug.Log(i + j);
-                    return allLevelSpawnPoints[(i * spawnPointZSize) + j];
+                    return (i * spawnPointZSize) + j;
                 }
             }
 
         }
-        return null;
+        return -1;
     }
     void addWeightToAllNeighbors(int i, int j, int weight)
     {
-        CellConnections[] listSides = new CellConnections[] { CellConnections.left, CellConnections.right, CellConnections.top, CellConnections.down };
-        foreach (CellConnections side in listSides) {
+        Neighbors[] listSides = new Neighbors[] { Neighbors.left, Neighbors.right, Neighbors.top, Neighbors.down };
+        foreach (Neighbors side in listSides) {
             SpawnPoint neighbor = getNeighbor(i, j, side);
             if (neighbor != null) {
                 if (neighbor.weight > 0)
@@ -155,8 +155,14 @@ public class LevelManager : MonoBehaviour
     void CheckSpawner()
     {
         int randompoint = Random.Range(0, this.totalWeight);
-        Transform itemPosition = findCellWithWeights(randompoint);
-        holeSpawner.Spawn(itemPosition);
-        GameObject.Destroy(itemPosition.gameObject);
+        int itemPosition = findCellWithWeights(randompoint);
+        if (itemPosition < 0)
+        {
+            return;
+        }
+        Transform oldTransform = allLevelSpawnPoints[itemPosition];
+        Transform newTransform = holeSpawner.Spawn(oldTransform);
+        GameObject.Destroy(oldTransform.gameObject);
+        allLevelSpawnPoints[itemPosition] = newTransform;
     }
 }
