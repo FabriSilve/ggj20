@@ -89,6 +89,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6548073598452798923}
   - component: {fileID: 6838814642555640041}
+  - component: {fileID: -7659082382465987799}
   m_Layer: 0
   m_Name: Hole
   m_TagString: Untagged
@@ -123,3 +124,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d79320239262b42a281db41e3f8f88ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sinkingMultiplier: 1
+--- !u!114 &-7659082382465987799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7819436315907352536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8c78b20673fb4589b07787d1139c92a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 2
+  weight: 0
+  column: 0
+  line: 0

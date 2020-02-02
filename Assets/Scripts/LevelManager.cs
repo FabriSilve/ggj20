@@ -66,6 +66,8 @@ public class LevelManager : MonoBehaviour
                 SpawnPoint spawnPointComponent = spawnPoint.GetComponent<SpawnPoint>();
 
                 grid[i,j] = spawnPointComponent;
+                spawnPointComponent.column = j;
+                spawnPointComponent.line = i;
 
                 //It lowers Z 
                 float x = -baseTerrain.transform.localScale.x / 2 + spawnPoint.transform.localScale.x / 2 + (j * spawnPoint.transform.localScale.x);
@@ -154,8 +156,7 @@ public class LevelManager : MonoBehaviour
 
     void equalizeWeights(int i, int j )
     {
-        grid[i, j].weight = 0;
-        grid[i, j].state = State.broken;
+        // We remove the own component weight
         totalWeight -= 1;
         addWeightToAllNeighbors(i, j, weightNeighbors);
     }
@@ -173,5 +174,8 @@ public class LevelManager : MonoBehaviour
         Transform newTransform = holeSpawner.Spawn(oldTransform);
         GameObject.Destroy(oldTransform.gameObject);
         allLevelSpawnPoints[pairPosition.Key, pairPosition.Value] = newTransform;
+        grid[pairPosition.Key, pairPosition.Value] = newTransform.GetComponent<SpawnPoint>();
+        newTransform.GetComponent<SpawnPoint>().column = pairPosition.Key;
+        newTransform.GetComponent<SpawnPoint>().line = pairPosition.Value;
     }
 }
