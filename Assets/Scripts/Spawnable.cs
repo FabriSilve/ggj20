@@ -41,6 +41,7 @@ public class Spawnable : MonoBehaviour
             StartCoroutine(DisposeObjectAfter(inactivePooledObject, lifetime));
             return inactivePooledObject.transform;
         } else {
+            Debug.Log("Van't return spawn");
             return null;
         }
     }
@@ -52,7 +53,7 @@ public class Spawnable : MonoBehaviour
         }
     }
 
-    bool Hide(GameObject obj) {
+    public bool Hide(GameObject obj) {
         if (!pool.Contains(obj)) return false;
         if (!obj.active) return false;
         obj.SetActive(false);

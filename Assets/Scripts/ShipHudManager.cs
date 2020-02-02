@@ -23,7 +23,9 @@ public class ShipHudManager : MonoBehaviour
 
     void Update()
     {
-        image.enabled = ApplicationManager.Instance.currentGameStatus == ApplicationManager.GameStatus.Playing;
+        image.enabled = 
+            ApplicationManager.Instance.currentGameStatus == ApplicationManager.GameStatus.Playing ||
+            ApplicationManager.Instance.currentGameStatus == ApplicationManager.GameStatus.Shopping;
 
         float newX = shipWidth / 2 + (Screen.width - shipWidth) * ApplicationManager.Instance.GetProgress();
         transform.position = new Vector3(newX, transform.position.y, transform.position.z);
