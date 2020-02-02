@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Water
   - Shop
+  - Tile
+  - Hole
   layers:
   - Default
   - TransparentFX
