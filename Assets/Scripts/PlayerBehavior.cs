@@ -31,30 +31,31 @@ public class PlayerBehavior : MonoBehaviour
     void Interact()
     {
         Item item = inventory.GetActiveItem();
+        GameObject tile = tileDetector.GetCurrentTile();
 
-        //if (item != null)
-        //{
-        //    switch (item.type)
-        //    {
-        //        case Item.ItemType.SinglePlank:
-        Debug.Log("using single plank");
-        Debug.Log(tileDetector.GetCurrentTile());
-        levelManager.FixTile(tileDetector.GetCurrentTile());
-        //break;
+        Debug.Log("Interact with " + item + " and " + tile);
 
-        //        default:
-        //            break;
-        //    }
-        //} else {
-        // TODO: play error sound
-        //}
-
-        if (item)
+        if (tile != null)
         {
-            IventoryMenu.Instance.HandleItemUsed(item);
-        }
+            //switch (item.type)
+            //{
+            //    case Item.ItemType.SinglePlank:
+            levelManager.FixTile(tile);
 
-        Instantiate(barrelPrefab, itemSpawnPoint.transform.position, Quaternion.identity);
+            //IventoryMenu.Instance.HandleItemUsed(item);
+
+            Vector3 barrelPosition = new Vector3(tile.transform.position.x, tile.transform.position.y, tile.transform.position.z);
+            Instantiate(barrelPrefab, barrelPosition, Quaternion.identity);
+
+            //break;
+
+            //        default:
+            //            break;
+            //    }
+            //} else {
+            // TODO: play error sound
+            //}
+        }
     }
 
     void ControlInput()
