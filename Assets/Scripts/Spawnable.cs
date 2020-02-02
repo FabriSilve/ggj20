@@ -52,7 +52,7 @@ public class Spawnable : MonoBehaviour
         }
     }
 
-    bool Hide(GameObject obj) {
+    public bool Hide(GameObject obj) {
         if (!pool.Contains(obj)) return false;
         if (!obj.active) return false;
         obj.SetActive(false);

@@ -25,9 +25,13 @@ public class LevelManager : MonoBehaviour
     public GameObject holeSpawnerGameObject;
     private Spawnable holeSpawner;
 
-    void Awake()
-    {
+
+    public GameObject tileSpawnerGameObject;
+    private Spawnable tileSpawner;
+
+    void Awake() {
         holeSpawner = holeSpawnerGameObject.GetComponent<Spawnable>();
+        tileSpawner = tileSpawnerGameObject.GetComponent<Spawnable>();
     }
 
     Transform[,] allLevelSpawnPoints;
@@ -150,9 +154,8 @@ public class LevelManager : MonoBehaviour
         foreach (Neighbors side in listSides)
         {
             SpawnPoint neighbor = getNeighbor(i, j, side);
-            if (neighbor != null)
-            {
-                if (neighbor.weight > 0)
+            if (neighbor != null) {
+                if (neighbor.weight > 0 && neighbor.state == State.empty)
                 {
                     neighbor.weight += weight;
                     totalWeight += weight;
@@ -163,9 +166,23 @@ public class LevelManager : MonoBehaviour
 
     void equalizeWeights(int i, int j)
     {
-        // We remove the own component weight
-        totalWeight -= 1;
+        // We remove the own component weight, and reset the component weight to 1;
+        totalWeight -= grid[i, j].weight;
+        grid[i, j].weight = 1;
         addWeightToAllNeighbors(i, j, weightNeighbors);
+    }
+
+    void fixTile(GameObject brokenTile)
+    {
+        SpawnPoint spawnPoint = brokenTile.GetComponent<SpawnPoint>();
+        spawnPoint.weight = 1; // we reset the weight
+        Transform oldTransform = allLevelSpawnPoints[spawnPoint.column, spawnPoint.line];
+        Transform newTransform = tileSpawner.Spawn(oldTransform);
+        holeSpawner.Hide(brokenTile);
+        allLevelSpawnPoints[spawnPoint.column, spawnPoint.line] = newTransform;
+        grid[spawnPoint.column, spawnPoint.line] = newTransform.GetComponent<SpawnPoint>();
+        newTransform.GetComponent<SpawnPoint>().column = spawnPoint.column;
+        newTransform.GetComponent<SpawnPoint>().line = spawnPoint.line;
     }
 
     void CheckSpawner()
