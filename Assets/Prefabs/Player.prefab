@@ -415,6 +415,7 @@ MonoBehaviour:
   rotationSpeed: 300
   controller: {fileID: 0}
   inventory: {fileID: 0}
+  tileDetector: {fileID: 0}
 --- !u!114 &8965038329478435246
 MonoBehaviour:
   m_ObjectHideFlags: 0

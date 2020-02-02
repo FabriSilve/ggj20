@@ -29,6 +29,8 @@ public class PlayerMovement : MonoBehaviour
     private CharacterController controller;
     [SerializeField]
     private Inventory inventory;
+    [SerializeField]
+    private CurrentTileDetector tileDetector;
 
     private Animator animator;
     private Vector3 prevPosition;
@@ -70,8 +72,9 @@ public class PlayerMovement : MonoBehaviour
     private float SpeedMultiplier()
     {
         int weight = inventory.Weight();
+        float waterSlowDown = tileDetector.IsOnHole() ? 0.5f : 1.0f; 
         // Super simple formula to linearly decrease player speed based on inventory weight.
-        float speedMultiplier = baseMovementSpeed - Mathf.Min(baseMovementSpeed / 2, weight);
+        float speedMultiplier = (baseMovementSpeed - Mathf.Min(baseMovementSpeed / 2, weight)) * waterSlowDown;
         return speedMultiplier;
     }
 
@@ -82,6 +85,7 @@ public class PlayerMovement : MonoBehaviour
         controller = GetComponent<CharacterController>();
         inventory = GetComponent<Inventory>();
         animator = GetComponent<Animator>();
+        tileDetector = GameObject.Find("ItemSpawnPoint").GetComponent<CurrentTileDetector>();
     }
 
     // Update is called once per frame
